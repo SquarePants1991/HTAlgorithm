@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'HTAlgorithm_Example' do
+  pod 'HTAlgorithm', :path => '../'
+
+  target 'HTAlgorithm_Tests' do
+    inherit! :search_paths
+
+    pod 'Specta'
+    pod 'Expecta'
+  end
+end
