@@ -58,14 +58,13 @@ describe(@"Linked List Test", ^{
     
     it(@"can insert before", ^{
         HTLinkedList *linkedList = [HTLinkedList new];
-        [linkedList append:@(100)];
-        [linkedList append:@(300)];
-        [linkedList insert:@(200) before:1];
-        expect([linkedList size]).to.equal(3);
+        [linkedList insert:@(200) before:0];
+        expect([linkedList size]).to.equal(1);
+        expect([[linkedList at:0] intValue]).to.equal(200);
+        [linkedList insert:@(400) before:0];
+        expect([linkedList size]).to.equal(2);
+        expect([[linkedList at:0] intValue]).to.equal(400);
         expect([[linkedList at:1] intValue]).to.equal(200);
-        [linkedList insert:@(400) before:2];
-        expect([[linkedList at:2] intValue]).to.equal(400);
-        expect([[linkedList at:3] intValue]).to.equal(300);
     });
     
     it(@"can insert after", ^{

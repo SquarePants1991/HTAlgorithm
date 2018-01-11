@@ -109,7 +109,7 @@
 }
 
 - (void)appendNode:(HTLinkedListNode *)node {
-    if (self.head == nil) {
+    if (self.head == nil || self.tail == nil) {
         self.head = node;
         self.tail = node;
     } else {
@@ -129,9 +129,12 @@
         }
         node.next = insertToNode;
         insertToNode.prev = node;
-    }
-    if (insertToNode == self.head) {
+        if (insertToNode == self.head) {
+            self.head = node;
+        }
+    } else if (self.head == nil && self.tail == nil) {
         self.head = node;
+        self.tail = node;
     }
 }
 
@@ -145,8 +148,13 @@
         }
         node.prev = insertToNode;
         insertToNode.next = node;
+        
+        if (insertToNode == self.tail) {
+            self.tail = node;
+        }
     }
-    if (insertToNode == self.tail) {
+    else if (self.head == nil && self.tail == nil) {
+        self.head = node;
         self.tail = node;
     }
 }

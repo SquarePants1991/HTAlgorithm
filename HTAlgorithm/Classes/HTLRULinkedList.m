@@ -52,8 +52,10 @@
         }
         node = node.next;
     }
-    [self removeNode:node];
-    [self insertNode:node before:0];
+    if (node) {
+        [self removeNode:node];
+        [self insertNode:node before:0];
+    }
     return foundPair.value;
 }
 @end
