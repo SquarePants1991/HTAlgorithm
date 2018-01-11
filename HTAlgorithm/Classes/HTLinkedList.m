@@ -81,6 +81,8 @@
     return nil;
 }
 
+#define IfNilThenReturn(node) if (node == nil) return
+
 - (HTLinkedListNode *)nodeAt:(NSUInteger)index {
     HTLinkedListNode *node = self.head;
     while (index--) {
@@ -90,6 +92,7 @@
 }
 
 - (void)removeNode:(HTLinkedListNode *)node {
+    IfNilThenReturn(node);
     if (node) {
         HTLinkedListNode *prev = node.prev;
         HTLinkedListNode *next = node.next;
@@ -109,6 +112,7 @@
 }
 
 - (void)appendNode:(HTLinkedListNode *)node {
+    IfNilThenReturn(node);
     if (self.head == nil || self.tail == nil) {
         self.head = node;
         self.tail = node;
@@ -120,6 +124,7 @@
 }
 
 - (void)insertNode:(HTLinkedListNode *)node before:(NSUInteger)index {
+    IfNilThenReturn(node);
     HTLinkedListNode *insertToNode = [self nodeAt:index];
     if (insertToNode != nil) {
         HTLinkedListNode *insertToPrevNode = insertToNode.prev;
@@ -139,6 +144,7 @@
 }
 
 - (void)insertNode:(HTLinkedListNode *)node after:(NSUInteger)index {
+    IfNilThenReturn(node);
     HTLinkedListNode *insertToNode = [self nodeAt:index];
     if (insertToNode != nil) {
         HTLinkedListNode *insertToNextNode = insertToNode.next;
