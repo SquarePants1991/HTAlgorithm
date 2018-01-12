@@ -25,9 +25,11 @@
     return self;
 }
 
-- (void)add:(id)value withKey:(id <HTLRUKey>)key {
+- (NSArray * _Nullable)add:(id)value withKey:(id <HTLRUKey>)key {
     HTLRULinkedListPair *pair = [HTLRULinkedListPair makePair:key value:value];
     NSUInteger size = [self size];
+    NSMutableArray *removedValues = nil;
+    
     if (size >= self.capacity) {
         HTLinkedListNode *willBeRemovedNode = [self nodeAt:size - 1];
         self.tail = willBeRemovedNode.prev;
@@ -37,8 +39,16 @@
         if (willBeRemovedNode == self.head) {
             self.head = nil;
         }
+        
+        removedValues = [NSMutableArray new];
+        while (willBeRemovedNode) {
+            HTLRULinkedListPair *pair = willBeRemovedNode.value;
+            [removedValues addObject: pair.value];
+            willBeRemovedNode = willBeRemovedNode.next;
+        }
     }
     [self insert:pair before:0];
+    return [removedValues copy];
 }
 
 - (__nullable id)fetch:(id <HTLRUKey>)key {

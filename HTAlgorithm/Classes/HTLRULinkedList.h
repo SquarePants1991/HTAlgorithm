@@ -12,21 +12,22 @@
 @end
 
 @interface HTLRULinkedListPair : NSObject
-@property (strong, nonatomic) id <HTLRUKey> key;
-@property (strong, nonatomic) id value;
+@property (strong, nonatomic) __nonnull id <HTLRUKey> key;
+@property (strong, nonatomic) __nonnull id value;
 
-+ (HTLRULinkedListPair *)makePair:(id <HTLRUKey>)key value:(id)value;
++ (HTLRULinkedListPair *)makePair:(__nonnull id <HTLRUKey>)key value:(__nonnull id)value;
 @end
 
 @interface HTLRULinkedList : HTLinkedList
 @property (assign, nonatomic, readonly) NSUInteger capacity;
 
-- (instancetype)initWithCapacity:(NSUInteger)capacity;
+- (__nonnull instancetype)initWithCapacity:(NSUInteger)capacity;
 
 /// 向列表头部增加新的value，如果列表已满，那么移除列表尾部的节点
 /// @param value 添加的value
 /// @param key 使用的键值
-- (void)add:(id)value withKey:(id <HTLRUKey>)key;
+/// @return NSArray 被移除的值的集合
+- (NSArray * _Nullable)add:(__nonnull id)value withKey:(__nonnull id <HTLRUKey>)key;
 
 /// 获取某个键值的对应的value，如果有，就返回，并且将value置于列表头部
 /// @param key 使用的键值

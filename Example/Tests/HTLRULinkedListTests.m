@@ -34,7 +34,9 @@ describe(@"LRULinked List Test", ^{
         [linkedList add:@(200) withKey:@"key-2"];
         [linkedList add:@(300) withKey:@"key-3"];
         expect([linkedList size]).to.equal(3);
-        [linkedList add:@(400) withKey:@"key-4"];
+        NSArray *removedVals = [linkedList add:@(400) withKey:@"key-4"];
+        expect([removedVals count]).to.equal(1);
+        expect([removedVals[0] intValue]).to.equal(100);
         expect([linkedList size]).to.equal(3);
         expect([[(HTLRULinkedListPair *)[linkedList at:0] value] intValue]).to.equal(400);
         expect([[(HTLRULinkedListPair *)[linkedList at:1] value] intValue]).to.equal(300);
