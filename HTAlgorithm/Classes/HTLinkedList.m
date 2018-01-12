@@ -108,6 +108,8 @@
         if (node == self.tail) {
             self.tail = prev;
         }
+        node.prev = nil;
+        node.next = nil;
     }
 }
 
